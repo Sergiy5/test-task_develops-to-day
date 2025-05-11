@@ -1,6 +1,6 @@
 import { DetailRecipe } from "@/components/DetailRecipe";
 
-export default async function RecipePage(props: {
+export default async function Page(props: {
   params: Promise<{ id: number }>;
 }) {
   const params = await props.params;

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Loader } from "./Loader";
 
 interface Props {
   id: number;
@@ -41,7 +42,7 @@ export const DetailRecipe=({ id }: Props) => {
     fetchRecipe();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   if (!recipe) return <div>Recipe not found.</div>;
 
   return (

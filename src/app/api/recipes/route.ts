@@ -1,29 +1,35 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const query = url.searchParams.get('query') || '';
-  const cuisine = url.searchParams.get('cuisine') || '';
-  const maxReadyTime = url.searchParams.get('maxReadyTime') || '';
+  try {
+    const url = new URL(req.url);
+    const query = url.searchParams.get('query') || '';
+    const cuisine = url.searchParams.get('cuisine') || '';
+    const maxReadyTime = url.searchParams.get('maxReadyTime') || '';
 
-  const params = new URLSearchParams({
-    apiKey: process.env.SPOONACULAR_API_KEY!,
-    query,
-    cuisine,
-    maxReadyTime,
-  });
+    const params = new URLSearchParams({
+      apiKey: process.env.SPOONACULAR_API_KEY!,
+      query,
+      cuisine,
+      maxReadyTime,
+    });
 
-  const res = await fetch(`https://api.spoonacular.com/recipes/complexSearch?${params.toString()}`);
+    const res = await fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?${params.toString()}`
+    );
 
-  if (!res.ok) {
-    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: 'Spoonacular API returned an error.' },
+        { status: res.status }
+      );
+    }
+
+    const data = await res.json();
+
+    return NextResponse.json(data.results || []);
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
-
-  const data = await res.json();
-
-  // Set Cache-Control header to cache for 1 minute (60 seconds)
-  const response = NextResponse.json(data.results || []);
-  response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
-
-  return response;
 }

@@ -2,7 +2,7 @@ import {Recipes} from "@/components/Recipes";
 
 export const revalidate = 60;  // Revalidate every 60 seconds
 
-export default async function RecipesPage({ 
+export default async function Page({ 
   searchParams 
 }: { 
   searchParams: { [key: string]: string | undefined } 
