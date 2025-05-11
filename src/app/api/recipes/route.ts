@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
-  const query = url.searchParams.get("query") || "";
-  const cuisine = url.searchParams.get("cuisine") || "";
-  const maxReadyTime = url.searchParams.get("maxReadyTime") || "";
+  const query = url.searchParams.get('query') || '';
+  const cuisine = url.searchParams.get('cuisine') || '';
+  const maxReadyTime = url.searchParams.get('maxReadyTime') || '';
 
   const params = new URLSearchParams({
     apiKey: process.env.SPOONACULAR_API_KEY!,
@@ -12,14 +12,18 @@ export async function GET(req: Request) {
     cuisine,
     maxReadyTime,
   });
-  const res = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?${params.toString()}`
-  );
+
+  const res = await fetch(`https://api.spoonacular.com/recipes/complexSearch?${params.toString()}`);
 
   if (!res.ok) {
-    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
   }
 
   const data = await res.json();
-  return NextResponse.json(data.results || []);
+
+  // Set Cache-Control header to cache for 1 minute (60 seconds)
+  const response = NextResponse.json(data.results || []);
+  response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
+
+  return response;
 }

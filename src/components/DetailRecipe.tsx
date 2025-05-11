@@ -30,7 +30,6 @@ export const DetailRecipe=({ id }: Props) => {
       try {
         const res = await fetch(`/api/detailRecipe?id=${id}`);
           const data = await res.json();
-          console.log("data ==========================>", data);
         setRecipe(data);
       } catch (error) {
         console.error("Failed to fetch recipe:", error);

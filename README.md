@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Test Task — Develops.Today
 
-## Getting Started
+This is a test task project built with **Next.js 15**, **React 19**, **TypeScript**, **Tailwind CSS 4**, and **React Hook Form**.
 
-First, run the development server:
+## 📦 Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **UI**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Forms**: [React Hook Form](https://react-hook-form.com/)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+- **Linting & Formatting**: ESLint, Prettier
+- **Language**: TypeScript
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+# or
+yarn
+```
+
+### 2. Run the development server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script            | Description                                 |
+|-------------------|---------------------------------------------|
+| `dev`             | Start dev server with Turbopack              |
+| `build`           | Build the production version                |
+| `start`           | Start the production server                 |
+| `lint`            | Run ESLint for code linting                 |
+| `format`          | Format all files with Prettier              |
+| `format:check`    | Check formatting without writing changes    |
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+/
+├── src/
+        ├── app/               # Next.js pages
+        ├── components/        # Reusable UI components           
+        ├── vars/              # Variables   
+├── public/              # Static files
+├── tsconfig.json        # TypeScript configuration
+└── next.config.js       # Next.js configuration
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✅ Requirements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Node.js v18+
+- npm or yarn
 
-## Deploy on Vercel
+## ✨ Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Built with the latest version of **Next.js (v15.3.2)** and **React 19**.
+- Uses **Turbopack** for faster development builds.
+- Designed to be minimal and easy to extend for test/demo purposes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Made for a technical assessment at **Develops.Today**.

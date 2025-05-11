@@ -1,13 +1,31 @@
-import { Suspense } from "react";
 import {Recipes} from "@/components/Recipes";
-// import Loading from "./loading"; // fallback
 
-export default function RecipesPage() {
+export const revalidate = 60;  // Revalidate every 60 seconds
+
+export default async function RecipesPage({ 
+  searchParams 
+}: { 
+  searchParams: { [key: string]: string | undefined } 
+  }) {
+  const params = await searchParams;
+  
+  const query = params.query;
+  const cuisine = params.cuisine;
+  const maxReadyTime = params.maxReadyTime;
+  
+  const getRecipes = async () => {
+    const res = await fetch(
+      `http://localhost:3000/api/recipes?query=${query}&cuisine=${cuisine}&maxReadyTime=${maxReadyTime}`
+    );
+    return res.json();
+  };
+
+  const recipes = await getRecipes();
+
+  
   return (
     <div className="p-6">
-      <Suspense fallback={<div className="text-center text-blue-400 text-2xl ">Loading...</div>}>
-        <Recipes />
-      </Suspense>
+        <Recipes recipes={recipes} />
     </div>
   );
 }
